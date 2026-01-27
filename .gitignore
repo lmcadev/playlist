@@ -1,0 +1,51 @@
+
+# Variable globales
+
+*.log
+*.tmp
+*.swp
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
+*.iml
+
+
+# Backend
+
+# outputs
+Backend/target/
+Backend/build/
+
+# Maven
+Backend/.mvn/
+Backend/mvnw
+Backend/mvnw.cmd
+
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+
+
+# Frontend 
+
+# Modulos
+Frontend/node_modules/
+
+# Buils
+Frontend/dist/
+Frontend/.angular/
+
+# .env
+Frontend/.env
+
+
+# cache
+Frontend/.angular/cache/
