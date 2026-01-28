@@ -26,6 +26,9 @@ Backend/.mvn/
 Backend/mvnw
 Backend/mvnw.cmd
 
+# Visual Code
+Backend/.vscode/
+
 
 # Java
 *.class
