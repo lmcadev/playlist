@@ -1,4 +1,6 @@
-package com.quipux.playlist.DTO;
+package com.quipux.playlist.DTO.auth;
+
+import com.quipux.playlist.DTO.usuario.UsuarioDTOResponse;
 
 import lombok.Data;
 

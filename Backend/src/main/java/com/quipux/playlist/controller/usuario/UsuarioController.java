@@ -1,8 +1,9 @@
-package com.quipux.playlist.controller;
+package com.quipux.playlist.controller.usuario;
 
-import com.quipux.playlist.DTO.UsuarioDTORequest;
-import com.quipux.playlist.DTO.UsuarioDTOResponse;
-import com.quipux.playlist.service.UsuarioService;
+import com.quipux.playlist.DTO.usuario.UsuarioDTORequest;
+import com.quipux.playlist.DTO.usuario.UsuarioDTOResponse;
+import com.quipux.playlist.service.usuario.UsuarioService;
+
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

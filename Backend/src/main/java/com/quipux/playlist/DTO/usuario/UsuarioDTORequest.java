@@ -1,4 +1,4 @@
-package com.quipux.playlist.DTO;
+package com.quipux.playlist.DTO.usuario;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

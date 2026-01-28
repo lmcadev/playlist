@@ -1,9 +1,11 @@
-package com.quipux.playlist.service;
+package com.quipux.playlist.service.auth;
 
-import com.quipux.playlist.DTO.LoginDTORequest;
-import com.quipux.playlist.DTO.LoginDTOResponse;
-import com.quipux.playlist.DTO.UsuarioDTOResponse;
-import com.quipux.playlist.model.Usuario;
+import com.quipux.playlist.DTO.auth.LoginDTORequest;
+import com.quipux.playlist.DTO.auth.LoginDTOResponse;
+import com.quipux.playlist.DTO.usuario.UsuarioDTOResponse;
+import com.quipux.playlist.model.usuario.Usuario;
+import com.quipux.playlist.service.jwt.JwtService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

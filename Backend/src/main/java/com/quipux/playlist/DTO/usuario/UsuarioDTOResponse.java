@@ -1,4 +1,4 @@
-package com.quipux.playlist.DTO;
+package com.quipux.playlist.DTO.usuario;
 
 import lombok.Data;
 

@@ -1,8 +1,11 @@
 package com.quipux.playlist.service;
 
-import com.quipux.playlist.DTO.LoginDTORequest;
-import com.quipux.playlist.DTO.LoginDTOResponse;
-import com.quipux.playlist.model.Usuario;
+import com.quipux.playlist.DTO.auth.LoginDTORequest;
+import com.quipux.playlist.DTO.auth.LoginDTOResponse;
+import com.quipux.playlist.model.usuario.Usuario;
+import com.quipux.playlist.service.auth.AuthService;
+import com.quipux.playlist.service.jwt.JwtService;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

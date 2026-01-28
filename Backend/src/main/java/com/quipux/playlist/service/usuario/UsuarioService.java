@@ -1,9 +1,10 @@
-package com.quipux.playlist.service;
+package com.quipux.playlist.service.usuario;
 
-import com.quipux.playlist.DTO.UsuarioDTORequest;
-import com.quipux.playlist.DTO.UsuarioDTOResponse;
-import com.quipux.playlist.model.Usuario;
-import com.quipux.playlist.repository.UsuarioRepository;
+import com.quipux.playlist.DTO.usuario.UsuarioDTORequest;
+import com.quipux.playlist.DTO.usuario.UsuarioDTOResponse;
+import com.quipux.playlist.model.usuario.Usuario;
+import com.quipux.playlist.repository.usuario.UsuarioRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

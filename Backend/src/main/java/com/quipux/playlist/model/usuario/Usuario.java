@@ -1,4 +1,4 @@
-package com.quipux.playlist.model;
+package com.quipux.playlist.model.usuario;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;

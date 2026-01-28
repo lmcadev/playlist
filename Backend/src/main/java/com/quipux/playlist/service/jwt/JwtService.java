@@ -1,4 +1,4 @@
-package com.quipux.playlist.service;
+package com.quipux.playlist.service.jwt;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;

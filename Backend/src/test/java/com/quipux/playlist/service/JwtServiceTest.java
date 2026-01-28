@@ -2,6 +2,8 @@ package com.quipux.playlist.service;
 
 import org.junit.jupiter.api.Test;
 
+import com.quipux.playlist.service.jwt.JwtService;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class JwtServiceTest {
