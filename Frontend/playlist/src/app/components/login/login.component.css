@@ -1,0 +1,36 @@
+.login-container {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+}
+
+.card {
+  border-radius: 16px;
+  border: none;
+  overflow: hidden;
+}
+
+.text-primary {
+  color: #667eea !important;
+}
+
+.input-group-text {
+  border-radius: 8px 0 0 8px;
+  border-right: none;
+}
+
+.form-control {
+  border-radius: 0 8px 8px 0;
+}
+
+.form-control:focus {
+  border-color: #667eea;
+  box-shadow: none;
+}
+
+.input-group:focus-within .input-group-text {
+  border-color: #667eea;
+}
+
+.bi {
+  font-size: 1.1rem;
+}

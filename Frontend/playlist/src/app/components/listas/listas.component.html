@@ -1,0 +1,279 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+  <div class="container-fluid">
+    <span class="navbar-brand fw-bold">
+      Playlist Manager
+    </span>
+    <div class="d-flex align-items-center">
+      <a class="nav-link text-white me-3" routerLink="/usuarios">
+        <i class="bi bi-people me-1"></i>Usuarios
+      </a>
+      <a class="nav-link text-white me-3" routerLink="/listas">
+        <i class="bi bi-music-note-list me-1"></i>Listas
+      </a>
+      <button class="btn btn-outline-light btn-sm" (click)="logout()">
+        <i class="bi bi-box-arrow-right me-1"></i>Salir
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="container mt-4">
+  @if (successMessage) {
+    <div class="alert alert-success alert-dismissible fade show">
+      <i class="bi bi-check-circle me-2"></i>{{ successMessage }}
+      <button type="button" class="btn-close" (click)="successMessage = ''"></button>
+    </div>
+  }
+
+  @if (errorMessage) {
+    <div class="alert alert-danger alert-dismissible fade show">
+      <i class="bi bi-exclamation-circle me-2"></i>{{ errorMessage }}
+      <button type="button" class="btn-close" (click)="errorMessage = ''"></button>
+    </div>
+  }
+
+  <div class="card">
+    <div class="card-header bg-white py-3">
+      <div class="d-flex justify-content-between align-items-center">
+        <h3 class="mb-0 fw-bold">
+          <i class="bi bi-music-note-list me-2"></i>Listas de Reproducción
+        </h3>
+        <button class="btn btn-primary" (click)="abrirModal()">
+          <i class="bi bi-plus-circle me-2"></i>Nueva Lista
+        </button>
+      </div>
+    </div>
+    <div class="card-body">
+      <p class="text-muted small">Total de listas: {{ listas.length }}</p>
+      @if (listas.length === 0) {
+        <div class="text-center py-5 text-muted">
+          <i class="bi bi-disc display-1"></i>
+          <p class="mt-3">No hay listas de reproducción</p>
+          <p class="small">Haz clic en "Nueva Lista" para crear una</p>
+        </div>
+      } @else {
+        <div class="row g-4">
+          @for (lista of listas; track lista.nombre) {
+            <div class="col-md-6 col-lg-4">
+              <div class="card h-100 lista-card" (click)="verDetalle(lista)">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-start mb-3">
+                    <h5 class="card-title fw-bold mb-0">
+                      <i class="bi bi-disc me-2 text-primary"></i>{{ lista.nombre }}
+                    </h5>
+                    <span class="badge bg-primary">{{ lista.canciones?.length || 0 }} canciones</span>
+                  </div>
+                  <p class="card-text text-muted">{{ lista.descripcion }}</p>
+                  <button 
+                    class="btn btn-outline-danger btn-sm mt-2"
+                    (click)="eliminarLista(lista.nombre); $event.stopPropagation()"
+                  >
+                    <i class="bi bi-trash me-1"></i>Eliminar
+                  </button>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      }
+    </div>
+  </div>
+</div>
+
+<!-- Modal Nueva Lista -->
+@if (showModal) {
+  <div class="modal fade show d-block" tabindex="-1" style="background-color: rgba(0,0,0,0.5);">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title fw-bold">
+            <i class="bi bi-plus-circle me-2"></i>Nueva Lista de Reproducción
+          </h5>
+          <button type="button" class="btn-close" (click)="cerrarModal()"></button>
+        </div>
+        <div class="modal-body">
+          <form #listaForm="ngForm">
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Nombre de la Lista</label>
+              <input 
+                type="text" 
+                class="form-control" 
+                [(ngModel)]="nuevaLista.nombre"
+                name="nombre"
+                required
+                placeholder="Mi playlist favorita"
+              />
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Descripción</label>
+              <textarea 
+                class="form-control" 
+                [(ngModel)]="nuevaLista.descripcion"
+                name="descripcion"
+                required
+                rows="2"
+                placeholder="Descripción de la lista"
+              ></textarea>
+            </div>
+
+            <hr>
+
+            <h6 class="fw-bold mb-3">
+              <i class="bi bi-music-note me-2"></i>Agregar Canciones
+            </h6>
+
+            <div class="row g-3 mb-3">
+              <div class="col-md-6">
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  [(ngModel)]="nuevaCancion.titulo"
+                  name="titulo"
+                  placeholder="Título"
+                />
+              </div>
+              <div class="col-md-6">
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  [(ngModel)]="nuevaCancion.artista"
+                  name="artista"
+                  placeholder="Artista"
+                />
+              </div>
+              <div class="col-md-4">
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  [(ngModel)]="nuevaCancion.album"
+                  name="album"
+                  placeholder="Álbum"
+                />
+              </div>
+              <div class="col-md-4">
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  [(ngModel)]="nuevaCancion.anno"
+                  name="anno"
+                  placeholder="Año"
+                />
+              </div>
+              <div class="col-md-4">
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  [(ngModel)]="nuevaCancion.genero"
+                  name="genero"
+                  placeholder="Género"
+                />
+              </div>
+            </div>
+
+            <button 
+              type="button" 
+              class="btn btn-sm btn-outline-primary mb-3"
+              (click)="agregarCancion()"
+            >
+              <i class="bi bi-plus-circle me-1"></i>Agregar Canción
+            </button>
+
+            @if (nuevaLista.canciones.length > 0) {
+              <div class="list-group">
+                @for (cancion of nuevaLista.canciones; track $index) {
+                  <div class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                      <strong>{{ cancion.titulo }}</strong> - {{ cancion.artista }}
+                      <br>
+                      <small class="text-muted">
+                        {{ cancion.album }} ({{ cancion.anno }}) - {{ cancion.genero }}
+                      </small>
+                    </div>
+                    <button 
+                      type="button" 
+                      class="btn btn-sm btn-outline-danger"
+                      (click)="eliminarCancion($index)"
+                    >
+                      <i class="bi bi-trash"></i>
+                    </button>
+                  </div>
+                }
+              </div>
+            } @else {
+              <div class="alert alert-info">
+                <i class="bi bi-info-circle me-2"></i>
+                No hay canciones agregadas. Agregue al menos una canción.
+              </div>
+            }
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="cerrarModal()">
+            Cancelar
+          </button>
+          <button 
+            type="button" 
+            class="btn btn-primary" 
+            (click)="guardarLista()"
+            [disabled]="!listaForm.valid || nuevaLista.canciones.length === 0"
+          >
+            <i class="bi bi-save me-2"></i>Guardar Lista
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+}
+
+<!-- Modal Detalle Lista -->
+@if (listaSeleccionada) {
+  <div class="modal fade show d-block" tabindex="-1" style="background-color: rgba(0,0,0,0.5);">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title fw-bold">
+            <i class="bi bi-disc me-2"></i>{{ listaSeleccionada.nombre }}
+          </h5>
+          <button type="button" class="btn-close" (click)="cerrarDetalle()"></button>
+        </div>
+        <div class="modal-body">
+          <p class="text-muted mb-4">{{ listaSeleccionada.descripcion }}</p>
+          
+          <h6 class="fw-bold mb-3">
+            <i class="bi bi-music-note-list me-2"></i>
+            Canciones ({{ listaSeleccionada.canciones.length }})
+          </h6>
+
+          <div class="list-group">
+            @for (cancion of listaSeleccionada.canciones; track $index) {
+              <div class="list-group-item">
+                <div class="d-flex align-items-center">
+                  <div class="me-3">
+                    <span class="badge bg-primary rounded-circle px-3 py-2">{{ $index + 1 }}</span>
+                  </div>
+                  <div class="flex-grow-1">
+                    <h6 class="mb-1 fw-bold">{{ cancion.titulo }}</h6>
+                    <p class="mb-0 text-muted small">
+                      <i class="bi bi-person me-1"></i>{{ cancion.artista }}
+                      <span class="mx-2">|</span>
+                      <i class="bi bi-disc me-1"></i>{{ cancion.album }}
+                      <span class="mx-2">|</span>
+                      <i class="bi bi-calendar me-1"></i>{{ cancion.anno }}
+                      <span class="mx-2">|</span>
+                      <i class="bi bi-tag me-1"></i>{{ cancion.genero }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="cerrarDetalle()">
+            Cerrar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+}

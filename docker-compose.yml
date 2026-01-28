@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  # Backend
+  backend:
+    build:
+      context: ./Backend
+      dockerfile: Dockerfile
+    container_name: playlist-backend
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - SPRING_DATASOURCE_URL=jdbc:h2:mem:testdb
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=123
+    networks:
+      - playlist-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Frontend
+  frontend:
+    build:
+      context: ./Frontend/playlist
+      dockerfile: Dockerfile
+    container_name: playlist-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - playlist-network
+    environment:
+      - API_URL=http://backend:8080
+
+networks:
+  playlist-network:
+    driver: bridge
